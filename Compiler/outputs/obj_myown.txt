@@ -1,0 +1,47 @@
+
+main:
+LI $t0 1
+SW $t0 0($sp)
+J BLOCK
+LI $v0 10
+SYSCALL
+
+BLOCK:
+
+MOVE $s0 $ra
+SW $zero -4($sp)
+SW $t0 -8($sp)
+LI $t0 2
+LI $t0 1
+ADD $t0 $t0 $t0
+SW $t0 -4($sp)
+SW $zero -12($sp)
+SW $t0 -12($sp)
+
+WHILE BLOCK125:
+J EXIT125
+
+WHILE BLOCK125:
+J WHILE125
+
+EXIT125:
+LI $t0 0
+MOVE $v0 $t0
+MOVE $ra $s0
+JR $ra
+
+READ:
+LIO $v0 4
+LA $a0 prompt
+SYSCALL
+LI $v0 5
+SYSCALL
+JR $ra
+
+WRITE:
+LI $v0 1
+SYSCALL
+LI $v0 4
+LA $a0 end
+SYSCALL
+JR $ra

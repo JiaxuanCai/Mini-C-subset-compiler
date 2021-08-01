@@ -1,0 +1,85 @@
+main:
+J BLOCK
+LI $v0 10
+SYSCALL
+
+BLOCK:
+SW $zero 0($sp)
+SW $zero -4($sp)
+SW $zero -8($sp)
+SW $zero -12($sp)
+J READ
+SW $v0 0($sp)
+J READ
+SW $v0 -4($sp)
+J READ
+SW $v0 -8($sp)
+LW $t0 -8($sp)
+LI $t1 0
+BEQ $t0 $t1 IF56
+J EXIT55
+
+IF56:
+LW $t0 0($sp)
+LW $t1 -4($sp)
+ADD $t0 $t0 $t1
+SW $t0 -12($sp)
+J EXIT55
+
+EXIT55:
+LW $t0 -8($sp)
+LI $t1 1
+BEQ $t0 $t1 IF88
+J EXIT87
+
+IF88:
+LW $t0 0($sp)
+LW $t1 -4($sp)
+SUB $t0 $t0 $t1
+SW $t0 -12($sp)
+J EXIT87
+
+EXIT87:
+LW $t0 -8($sp)
+LI $t1 2
+BEQ $t0 $t1 IF120
+J EXIT119
+
+IF120:
+LW $t0 0($sp)
+LW $t1 -4($sp)
+SW $t0 -12($sp)
+J EXIT119
+
+EXIT119:
+LW $t0 -8($sp)
+LI $t2 3
+BEQ $t0 $t2 IF152
+J EXIT151
+
+IF152:
+LW $t0 0($sp)
+LW $t2 -4($sp)
+SW $t0 -12($sp)
+J EXIT151
+
+EXIT151:
+LW $t0 -12($sp)
+MOVE $a0 $t0
+J WRITE
+
+READ:
+LI $v0 4
+LA $a0 prompt
+SYSCALL
+LI $v0 5
+SYSCALL
+J $ra
+
+WRITE:
+LI $v0 1
+SYSCALL
+LI $v0 4
+LA $a0 end
+SYSCALL
+JR $ra

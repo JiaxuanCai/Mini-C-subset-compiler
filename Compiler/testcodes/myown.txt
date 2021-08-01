@@ -1,0 +1,20 @@
+int f(int a){
+    return a+1;
+}
+
+int y = 1;
+
+int main(){
+    int x;
+    bool b = true;
+    //x = f(1)+1;
+    x = 2 + 1;
+    int z;
+    z = --x;
+    f(3);
+
+    while(true){
+        z += 2;
+    }
+    return 0;
+}
